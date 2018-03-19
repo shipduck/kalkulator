@@ -1,0 +1,12 @@
+#display {
+	height: 20vh;
+	color: white;
+
+	> span {
+		display: inline-block;
+		width: calc(100vw - 16px);
+		font-size: 16vh;
+		line-height: 20vh;
+		text-align: right;
+	}
+}

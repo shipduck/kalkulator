@@ -1,0 +1,49 @@
+#pad, #pad tr, #pad tr td {
+	border: 0;
+}
+
+#pad {
+	margin: 0;
+	background-color: transparent;
+
+	tr {
+		td {
+			padding: 4px 0;
+			text-align: center;
+
+			button {
+				margin: 0;
+				padding: 0;
+				width: calc(25vw - 12px);
+				height: calc(16vh - 9px);
+				font-size: calc(10vh - 9px);
+			}
+		}
+	}
+
+	&_zero {
+		button {
+			width: calc(50vw - 12px) !important;
+		}
+	}
+
+	.button_a {
+		background-color: #a5a6a7;
+		color: black;
+	}
+
+	.button_b {
+		background-color: #fb9526;
+		color: white;
+
+		&.active {
+			background-color: white;
+			color: #fb9526;
+		}
+	}
+
+	.button_c {
+		background-color: #323334;
+		color: white;
+	}
+}

@@ -1,0 +1,46 @@
+{
+  "name": "kalkulator",
+  "version": "0.0.1",
+  "description": "\"4th industrial revolution web calculator\"",
+  "main": "./src/index.tsx",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-react": "^0.78.3"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "cross-env": "^5.1.4",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "ts-loader": "^4.1.0",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "scripts": {
+    "start:dev": "webpack-dev-server --mode development --port 8112",
+    "start:prod": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shipduck/kalkulator.git"
+  },
+  "keywords": [
+    "calculator",
+    "iOS"
+  ],
+  "author": "shipduck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shipduck/kalkulator/issues"
+  },
+  "homepage": "https://github.com/shipduck/kalkulator#readme"
+}
