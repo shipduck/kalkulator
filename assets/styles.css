@@ -1,13 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);#display {
-  height: 20vh;
-  color: white; }
-  #display > span {
-    display: inline-block;
-    width: calc(100vw - 16px);
-    font-size: 16vh;
-    line-height: 20vh;
-    text-align: right; }
-#pad, #pad tr, #pad tr td {
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);#pad, #pad tr, #pad tr td {
   border: 0; }
 
 #pad {
@@ -36,6 +27,15 @@
   #pad .button_c {
     background-color: #323334;
     color: white; }
+#display {
+  height: 20vh;
+  color: white; }
+  #display > span {
+    display: inline-block;
+    width: calc(100vw - 16px);
+    font-size: 16vh;
+    line-height: 20vh;
+    text-align: right; }
 #app, #app > div {
   height: 100%; }
 
