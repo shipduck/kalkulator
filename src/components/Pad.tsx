@@ -94,7 +94,7 @@ export class Pad extends React.Component<PadProps, PadState> {
 
 	public render() {
 		return (
-			<Table id="pad">
+			<Table id="pad" unstackable>
 				<Table.Body>
 					<Table.Row>
 						<Table.Cell>
