@@ -13,5 +13,11 @@ npm install
 ### run dev server
 
 ```sh
-npm run start:dev
+npm run start
+```
+
+### build
+
+```sh
+npm run build
 ```

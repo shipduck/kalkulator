@@ -9,7 +9,7 @@ const prod = process.env.NODE_ENV === 'prod';
 const config = {
 	'entry': './src/index.tsx',
 	'output': {
-		'path': path.resolve(__dirname, '../dist/assets'),
+		'path': path.resolve(__dirname, './assets'),
 		'publicPath': '/assets/',
 		'filename': 'bundle.js',
 	},
@@ -58,18 +58,9 @@ const config = {
 };
 
 if(prod) {
-	config.plugins = [
-		...config.plugins,
-		new webpack.optimize.UglifyJsPlugin({
-			'sourceMap': true,
-			'compress': {
-				'warnings': false,
-			},
-		}),
-		new webpack.LoaderOptionsPlugin({
-			'minimize': true,
-		}),
-	];
+	config.optimization = {
+		'minimize': true,
+	};
 }
 
 module.exports = config;

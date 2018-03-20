@@ -26,8 +26,8 @@
     "webpack-dev-server": "^3.1.1"
   },
   "scripts": {
-    "start:dev": "webpack-dev-server --mode development --port 8112",
-    "start:prod": "webpack"
+    "build": "cross-env NODE_ENV=prod webpack --mode production",
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --mode development --port 8112"
   },
   "repository": {
     "type": "git",
