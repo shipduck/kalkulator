@@ -4,14 +4,18 @@ const webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const HtmlPlugin = require('html-webpack-plugin');
+
 const prod = process.env.NODE_ENV === 'prod';
 
 const config = {
-	'entry': './src/index.tsx',
+	'entry': {
+		'bundle': './src/index.tsx',
+	},
 	'output': {
 		'path': path.resolve(__dirname, './assets'),
-		'publicPath': '/assets/',
-		'filename': 'bundle.js',
+		'publicPath': '/',
+		'filename': 'assets/[name].js',
 	},
 	'module': {
 		'rules': [
@@ -54,6 +58,9 @@ const config = {
 			'__dev': prod === false,
 		}),
 		new ExtractTextPlugin('styles.css'),
+		new HtmlPlugin({
+			'template': path.join(__dirname, 'src/index.html'),
+		}),
 	],
 };
 
