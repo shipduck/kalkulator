@@ -10,15 +10,17 @@ const OfflinePlugin = require('offline-plugin');
 
 const prod = process.env.NODE_ENV === 'prod';
 
+const assetsPrefix = 'assets/';
+
 const config = {
 	'entry': {
 		'bundle': './src/index.tsx',
 		'offline': './src/offline.ts',
 	},
 	'output': {
-		'path': path.resolve(__dirname, './assets'),
+		'path': path.resolve(__dirname, 'app'),
 		'publicPath': '/',
-		'filename': 'assets/[name].js',
+		'filename': `${assetsPrefix}[name].js`,
 	},
 	'module': {
 		'rules': [
@@ -42,7 +44,7 @@ const config = {
 				'test': /\.(png|jpe?g|gif|svg|ico|eot|ttf|woff2?)$/,
 				'loader': 'file-loader',
 				'options': {
-					'name': '[name].[ext]?[hash]',
+					'name': `${assetsPrefix}[name].[ext]?[hash]`,
 				},
 			},
 		],
@@ -60,13 +62,14 @@ const config = {
 		new webpack.DefinePlugin({
 			'__dev': prod === false,
 		}),
-		new ExtractTextPlugin('styles.css'),
+		new ExtractTextPlugin(`${assetsPrefix}styles.css`),
 		new HtmlPlugin({
 			'template': path.join(__dirname, 'src/index.html'),
 		}),
 		new OfflinePlugin({
 			'ServiceWorker': {
 				'minify': false,
+				'output': `${assetsPrefix}offline-sw.js`,
 			},
 		}),
 	],
