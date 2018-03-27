@@ -1,13 +1,14 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "commonjs",
+		"module": "esnext",
+		"moduleResolution": "node",
 		"lib": [
 			"dom",
 			"es2015.promise",
 			"es2017.object",
 			"es5",
-			"es2015.core"
+			"es2015.core",
 		],
 		"jsx": "react",
 		"declaration": false,
