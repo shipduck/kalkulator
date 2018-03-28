@@ -1,4 +1,16 @@
 import React from 'react';
+import {
+	connect,
+	Dispatch,
+} from 'react-redux';
+
+import {
+	State,
+} from '../reducers';
+
+import {
+	displayUpdate,
+} from '../actions';
 
 import {
 	Table,
@@ -7,12 +19,7 @@ import {
 
 import '../styles/Pad.scss';
 
-interface PadProps {
-	value: number;
-	handler: (value: number) => void;
-};
-
-enum State {
+enum PadState {
 	IDLE = 'idle',
 	ADDITION = 'addition',
 	SUBTRACTION = 'subtraction',
@@ -20,46 +27,51 @@ enum State {
 	DIVISION = 'division',
 };
 
-interface PadState {
-	state: State;
-	prevValue: number;
-	prevState: State;
+interface ComponentProps {
+	value: number;
+	dispatch: Dispatch<any>;
 };
 
-export class Pad extends React.Component<PadProps, PadState> {
-	constructor(props: PadProps) {
+interface ComponentState {
+	state: PadState;
+	prevValue: number;
+	prevState: PadState;
+};
+
+class _Pad extends React.Component<ComponentProps, ComponentState> {
+	constructor(props: ComponentProps) {
 		super(props);
 
 		this.state = {
-			'state': State.IDLE,
+			'state': PadState.IDLE,
 			'prevValue': 0,
-			'prevState': State.IDLE,
+			'prevState': PadState.IDLE,
 		};
 	}
 
 	private clickClear() {
-		this.props.handler(0);
+		this.props.dispatch(displayUpdate(0));
 		this.setState({
-			'state': State.IDLE,
+			'state': PadState.IDLE,
 		});
 	}
 
 	private clickNumber(value: number) {
-		if(this.state.state !== State.IDLE) {
+		if(this.state.state !== PadState.IDLE) {
 			this.setState({
 				'prevValue': this.props.value,
 				'prevState': this.state.state,
-				'state': State.IDLE,
+				'state': PadState.IDLE,
 			});
-			this.props.handler(value);
+			this.props.dispatch(displayUpdate(value));
 
 			return;
 		}
 
-		this.props.handler(this.props.value * 10 + value);
+		this.props.dispatch(displayUpdate(this.props.value * 10 + value));
 	}
 
-	private clickOperator(state: State) {
+	private clickOperator(state: PadState) {
 		this.setState({
 			'state': state
 		});
@@ -69,26 +81,26 @@ export class Pad extends React.Component<PadProps, PadState> {
 		let value = this.props.value;
 
 		switch(this.state.prevState) {
-		case State.IDLE:
+		case PadState.IDLE:
 			break;
-		case State.ADDITION:
+		case PadState.ADDITION:
 			value = this.state.prevValue + value;
 			break;
-		case State.SUBTRACTION:
+		case PadState.SUBTRACTION:
 			value = this.state.prevValue - value;
 			break;
-		case State.MULTIPLICATION:
+		case PadState.MULTIPLICATION:
 			value = this.state.prevValue * value;
 			break;
-		case State.DIVISION:
+		case PadState.DIVISION:
 			value = this.state.prevValue / value;
 			break;
 		}
 
-		this.props.handler(value);
+		this.props.dispatch(displayUpdate(value));
 		this.setState({
 			'prevValue': 0,
-			'prevState': State.IDLE,
+			'prevState': PadState.IDLE,
 		});
 	}
 
@@ -109,8 +121,8 @@ export class Pad extends React.Component<PadProps, PadState> {
 							<Button circular className="button_a">%</Button>
 						</Table.Cell>
 						<Table.Cell>
-							<Button circular className={`button_b ${this.state.state === State.DIVISION ? 'active' : ''}`} onClick={() => {
-								this.clickOperator(State.DIVISION);
+							<Button circular className={`button_b ${this.state.state === PadState.DIVISION ? 'active' : ''}`} onClick={() => {
+								this.clickOperator(PadState.DIVISION);
 							}}>÷</Button>
 						</Table.Cell>
 					</Table.Row>
@@ -131,8 +143,8 @@ export class Pad extends React.Component<PadProps, PadState> {
 							}}>9</Button>
 						</Table.Cell>
 						<Table.Cell>
-							<Button circular className={`button_b ${this.state.state === State.MULTIPLICATION ? 'active' : ''}`} onClick={() => {
-								this.clickOperator(State.MULTIPLICATION);
+							<Button circular className={`button_b ${this.state.state === PadState.MULTIPLICATION ? 'active' : ''}`} onClick={() => {
+								this.clickOperator(PadState.MULTIPLICATION);
 							}}>×</Button>
 						</Table.Cell>
 					</Table.Row>
@@ -153,8 +165,8 @@ export class Pad extends React.Component<PadProps, PadState> {
 							}}>6</Button>
 						</Table.Cell>
 						<Table.Cell>
-							<Button circular className={`button_b ${this.state.state === State.SUBTRACTION ? 'active' : ''}`} onClick={() => {
-								this.clickOperator(State.SUBTRACTION);
+							<Button circular className={`button_b ${this.state.state === PadState.SUBTRACTION ? 'active' : ''}`} onClick={() => {
+								this.clickOperator(PadState.SUBTRACTION);
 							}}>-</Button>
 						</Table.Cell>
 					</Table.Row>
@@ -175,8 +187,8 @@ export class Pad extends React.Component<PadProps, PadState> {
 							}}>3</Button>
 						</Table.Cell>
 						<Table.Cell>
-							<Button circular className={`button_b ${this.state.state === State.ADDITION ? 'active' : ''}`} onClick={() => {
-								this.clickOperator(State.ADDITION);
+							<Button circular className={`button_b ${this.state.state === PadState.ADDITION ? 'active' : ''}`} onClick={() => {
+								this.clickOperator(PadState.ADDITION);
 							}}>+</Button>
 						</Table.Cell>
 					</Table.Row>
@@ -200,3 +212,17 @@ export class Pad extends React.Component<PadProps, PadState> {
 		);
 	}
 }
+
+function mapStateToProps(state: State) {
+	return {
+		'value': state.display.value,
+	};
+}
+
+function mapDispatchToProps(dispatch: Dispatch<any>) {
+	return {
+		'dispatch': dispatch,
+	};
+}
+
+export const Pad = connect(mapStateToProps, mapDispatchToProps)(_Pad);
