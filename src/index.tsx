@@ -20,6 +20,8 @@ import {
 	App,
 } from './containers/App';
 
+import './index.html';
+
 const store = createStore<State, Action, void, void>(reducers);
 
 class AppRouter extends React.Component {
